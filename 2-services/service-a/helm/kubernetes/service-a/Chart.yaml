@@ -1,0 +1,4 @@
+---
+name: service-a
+version: 1.0.0-SNAPSHOT
+apiVersion: v2

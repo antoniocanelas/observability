@@ -1,0 +1,39 @@
+apiVersion: opentelemetry.io/v1alpha1
+kind: OpenTelemetryCollector
+metadata:
+  name: otel
+  namespace: observability-backend
+spec:
+  image: ghcr.io/open-telemetry/opentelemetry-collector-releases/opentelemetry-collector-contrib:0.118.0
+  mode: daemonset
+  replicas: 1
+  ports:
+    - port: 8888
+      protocol: TCP
+      name: metrics
+  config: |
+    receivers:
+      otlp:
+        protocols:
+          grpc:
+            endpoint: 0.0.0.0:4317
+          http:
+            endpoint: 0.0.0.0:4318
+
+    exporters:
+      otlp/tempo:
+        endpoint: tempo-distributor.default.svc.cluster.local:4317
+        tls:
+          insecure: true
+      otlp/jaeger:
+        endpoint: jaeger-collector:4317
+        tls:
+          insecure: true
+    service:
+      pipelines:
+        traces:
+          receivers:
+            - otlp
+          exporters:
+            - otlp/jaeger
+            - otlp/tempo

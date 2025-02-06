@@ -1,0 +1,6 @@
+### service-b greeting local
+POST 172.18.0.3:80/service-b/proccess?language=k-pt
+Content-Type: text/plain
+correlationId: InternalServiceb
+
+"Antonio Canelas"

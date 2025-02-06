@@ -1,0 +1,14 @@
+### service-a greeting local
+POST http://localhost:80/service-a/local?language=k-pt
+Content-Type: text/plain
+correlationId: InternalServiceA
+
+"Antonio Canelas"
+
+
+### service-a proccess service-b
+POST http://localhost:80/service-a/proccess?language=k-br
+Content-Type: text/plain
+correlationId: ServiceA->ServiceB
+
+"Antonio Canelas"
