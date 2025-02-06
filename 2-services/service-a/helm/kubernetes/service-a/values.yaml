@@ -1,0 +1,6 @@
+---
+app:
+  image: ctw00293/service-a:1.0.0-SNAPSHOT
+  name: service-a
+  ports:
+    http: 8080

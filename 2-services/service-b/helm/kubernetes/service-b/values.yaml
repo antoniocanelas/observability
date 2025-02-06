@@ -1,0 +1,6 @@
+---
+app:
+  image: ctw00293/service-b:1.0.0-SNAPSHOT
+  name: service-b
+  ports:
+    http: 8081

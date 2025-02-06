@@ -1,0 +1,29 @@
+config:
+  exporters:
+    "otlp/tempo":
+      endpoint: tempo-distributor.default.svc.cluster.local:4317
+      tls:
+        insecure: true
+    otlp:
+      endpoint: jaeger-collector:4317
+      tls:
+        insecure: true
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:4317
+        http:
+          endpoint: 0.0.0.0:4318
+          cors:
+            allowed_origins:
+              - http://*
+              - https://*
+  service:
+    pipelines:
+      traces:
+        receivers:
+          - otlp
+        exporters:
+          - otlp
+          - "otlp/tempo"
